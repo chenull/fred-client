@@ -148,8 +148,13 @@ class Lorry:
             if len(DATA) > 3 and DATA[2] and DATA[3]:
                 if ssl:
                     # python 2.6
-                    self._conn_ssl = ssl.wrap_socket(self._conn, 
-                                             keyfile=DATA[2], certfile=DATA[3])
+                    verify = ssl.CERT_NONE
+                    ca_certs = None
+                    if DATA[8]:
+                        verify = ssl.CERT_REQUIRED
+                        ca_certs = DATA[8]
+                    self._conn_ssl = ssl.wrap_socket(self._conn, cert_reqs=verify,
+                                     ca_certs=ca_certs, keyfile=DATA[2], certfile=DATA[3])
                 else:
                     # python 2.5
                     self._conn_ssl = socket.ssl(self._conn, DATA[2], DATA[3])

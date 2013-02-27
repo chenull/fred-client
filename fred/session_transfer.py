@@ -176,6 +176,7 @@ class ManagerTransfer(ManagerBase):
                 self.get_config_value(section,'socket',OMIT_ERROR),
                 self.get_config_value(self._section_epp_login, 'username',OMIT_ERROR),
                 self.get_config_value(self._section_epp_login, 'password',OMIT_ERROR),
+                self.get_config_value(section, 'ca_certs',OMIT_ERROR),
                 ]
         # overwrite username+password by command line
         if self._epp_cmd._dct.has_key('username'): data[6] = self._epp_cmd._dct['username'][0]
